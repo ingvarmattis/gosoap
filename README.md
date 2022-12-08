@@ -1,10 +1,10 @@
-# Go Soap [![Build Status](https://travis-ci.org/tiaguinho/gosoap.svg?branch=master)](https://travis-ci.org/tiaguinho/gosoap) [![GoDoc](https://godoc.org/github.com/tiaguinho/gosoap?status.png)](https://godoc.org/github.com/tiaguinho/gosoap) [![Go Report Card](https://goreportcard.com/badge/github.com/tiaguinho/gosoap)](https://goreportcard.com/report/github.com/tiaguinho/gosoap) [![Coverage Status](https://coveralls.io/repos/github/tiaguinho/gosoap/badge.svg?branch=master)](https://coveralls.io/github/tiaguinho/gosoap?branch=master) [![patreon](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://www.patreon.com/temporin) [![Known Vulnerabilities](https://snyk.io/test/github/tiaguinho/gosoap/badge.svg)](https://snyk.io/test/github/tiaguinho/gosoap)
+# Go Soap [![Build Status](https://travis-ci.org/ingvarmattis/gosoap.svg?branch=master)](https://travis-ci.org/ingvarmattis/gosoap) [![GoDoc](https://godoc.org/github.com/tiaguinho/gosoap?status.png)](https://godoc.org/github.com/tiaguinho/gosoap) [![Go Report Card](https://goreportcard.com/badge/github.com/tiaguinho/gosoap)](https://goreportcard.com/report/github.com/tiaguinho/gosoap) [![Coverage Status](https://coveralls.io/repos/github/tiaguinho/gosoap/badge.svg?branch=master)](https://coveralls.io/github/tiaguinho/gosoap?branch=master) [![patreon](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://www.patreon.com/temporin) [![Known Vulnerabilities](https://snyk.io/test/github/tiaguinho/gosoap/badge.svg)](https://snyk.io/test/github/tiaguinho/gosoap)
 package to help with SOAP integrations (client)
 
 ### Install
 
 ```bash
-go get github.com/tiaguinho/gosoap
+go get github.com/ingvarmattis/gosoap
 ```
 
 ### Examples
@@ -20,7 +20,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/tiaguinho/gosoap"
+	"github.com/ingvarmattis/gosoap"
 )
 
 // GetIPLocationResponse will hold the Soap response
@@ -87,7 +87,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/tiaguinho/gosoap"
+	"github.com/ingvarmattis/gosoap"
 )
 
 // GetIPLocationResponse will hold the Soap response
