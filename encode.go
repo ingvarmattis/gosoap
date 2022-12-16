@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	soapPrefix = "soap"
+	soapPrefix                            = "soap12"
 	customEnvelopeAttrs map[string]string = nil
 )
 
@@ -130,7 +130,7 @@ func (tokens *tokenData) startEnvelope() {
 		e.Attr = make([]xml.Attr, 0)
 		for local, value := range customEnvelopeAttrs {
 			e.Attr = append(e.Attr, xml.Attr{
-				Name: xml.Name{Space: "", Local: local},
+				Name:  xml.Name{Space: "", Local: local},
 				Value: value,
 			})
 		}

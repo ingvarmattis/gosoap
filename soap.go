@@ -49,12 +49,14 @@ type Config struct {
 }
 
 // SoapClient return new *Client to handle the requests with the WSDL
-func SoapClient(wsdl, bindingName string, httpClient *http.Client) (*Client, error) {
-	return SoapClientWithConfig(wsdl, bindingName, httpClient, &Config{Dump: false, Logger: &fmtLogger{}})
+func SoapClient(wsdl, bindingName, envelope string, httpClient *http.Client) (*Client, error) {
+	return SoapClientWithConfig(wsdl, bindingName, envelope, httpClient, &Config{Dump: false, Logger: &fmtLogger{}})
 }
 
 // SoapClientWithConfig return new *Client to handle the requests with the WSDL
-func SoapClientWithConfig(wsdl, bindingName string, httpClient *http.Client, config *Config) (*Client, error) {
+func SoapClientWithConfig(
+	wsdl, bindingName, envelope string, httpClient *http.Client, config *Config,
+) (*Client, error) {
 	_, err := url.Parse(wsdl)
 	if err != nil {
 		return nil, err
@@ -74,6 +76,10 @@ func SoapClientWithConfig(wsdl, bindingName string, httpClient *http.Client, con
 		config:      config,
 		HTTPClient:  httpClient,
 		AutoAction:  false,
+	}
+
+	if envelope != "" {
+		SetCustomEnvelope(envelope, nil)
 	}
 
 	return c, nil
