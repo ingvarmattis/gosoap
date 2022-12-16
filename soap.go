@@ -49,12 +49,12 @@ type Config struct {
 }
 
 // SoapClient return new *Client to handle the requests with the WSDL
-func SoapClient(wsdl string, httpClient *http.Client) (*Client, error) {
-	return SoapClientWithConfig(wsdl, httpClient, &Config{Dump: false, Logger: &fmtLogger{}})
+func SoapClient(wsdl, bindingName string, httpClient *http.Client) (*Client, error) {
+	return SoapClientWithConfig(wsdl, bindingName, httpClient, &Config{Dump: false, Logger: &fmtLogger{}})
 }
 
 // SoapClientWithConfig return new *Client to handle the requests with the WSDL
-func SoapClientWithConfig(wsdl string, httpClient *http.Client, config *Config) (*Client, error) {
+func SoapClientWithConfig(wsdl, bindingName string, httpClient *http.Client, config *Config) (*Client, error) {
 	_, err := url.Parse(wsdl)
 	if err != nil {
 		return nil, err
@@ -69,10 +69,11 @@ func SoapClientWithConfig(wsdl string, httpClient *http.Client, config *Config) 
 	}
 
 	c := &Client{
-		wsdl:       wsdl,
-		config:     config,
-		HTTPClient: httpClient,
-		AutoAction: false,
+		wsdl:        wsdl,
+		bindingName: bindingName,
+		config:      config,
+		HTTPClient:  httpClient,
+		AutoAction:  false,
 	}
 
 	return c, nil
@@ -87,6 +88,7 @@ type Client struct {
 	HeaderName   string
 	HeaderParams SoapParams
 	Definitions  *wsdlDefinitions
+	bindingName  string
 	// Must be set before first request otherwise has no effect, minimum is 15 minutes.
 	RefreshDefinitionsAfter time.Duration
 	Username                string
@@ -173,7 +175,7 @@ func (c *Client) Do(req *Request) (res *Response, err error) {
 	p := &process{
 		Client:     c,
 		Request:    req,
-		SoapAction: c.Definitions.GetSoapActionFromWsdlOperation(req.Method),
+		SoapAction: c.Definitions.GetSoapActionFromWsdlOperation(req.Method, c.bindingName),
 	}
 
 	if p.SoapAction == "" && c.AutoAction {
