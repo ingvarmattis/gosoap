@@ -23,7 +23,10 @@ type SoapParams interface{}
 type HeaderParams map[string]interface{}
 
 // Params type is used to set the params in soap request
-type Params map[string]interface{}
+type Params struct {
+	Key   string
+	Value interface{}
+}
 type ArrayParams [][2]interface{}
 type SliceParams []interface{}
 
